@@ -1,11 +1,44 @@
-import { useState } from 'react'
+import {createBrowserRouter,RouterProvider} from 'react-router-dom'
+import Hero from './pages/Hero'
+import RecruiterDashboard from './pages/RecruiterDashboard'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import UpdateProfile from './pages/UpdateProfile'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const router=createBrowserRouter([
+    
+    {
+      path:'/',
+      element:<Home/>,
+      children:[
+        {
+          index:true,
+          element:<Hero/>
+        },
+        {
+          path:'dashboard',
+          element:<RecruiterDashboard/>
+        },
+        {
+          path:'login',
+          element:<Login/>
+        },
+        {
+          path:'signup',
+          element:<Signup/>
+        },
+        {
+          path:'update-profile',
+          element:<UpdateProfile/>
+        }
+      ]
+    }
+  ])
   return (
     <>
-    <div className=''>CPMS -Frontend</div>
+     <RouterProvider router={router}/>
     </>
   )
 }
