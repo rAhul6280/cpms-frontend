@@ -37,7 +37,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log("Form Submitted", formData);
+      
       
     }
   };
@@ -45,7 +45,7 @@ function Signup() {
   const handleChange = (e) => {
     const { value, name } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error for the field when user types
+
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -145,15 +145,15 @@ function Signup() {
       </div>
 
       {/* Right Container - Colorful Div */}
-      <div className=' md:flex hidden w-full md:w-1/2 bg-linear-to-br from-blue-600 via-indigo-600 to-purple-700 flex-col justify-center items-center py-16 px-10 text-white relative overflow-hidden md:min-h-screen'>
+      <div className=' md:flex hidden  w-1/2 bg-linear-to-br from-blue-600 via-indigo-600 to-purple-700 flex-col justify-center items-center py-16 px-10 text-white relative overflow-hidden min-h-screen'>
         
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white opacity-10 blur-3xl"></div>
+          <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white opacity-10 blur-2xl"></div>
           <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-purple-400 opacity-20 blur-2xl"></div>
         </div>
         
         <div className='relative z-10 text-center max-w-lg mx-auto'>
-          <h2 className='text-4xl md:text-5xl font-extrabold mb-6 leading-tight drop-shadow-md'>Welcome to CPMS!</h2>
+          <h2 className='text-5xl font-extrabold mb-6 leading-tight drop-shadow-md'>Welcome to CPMS!</h2>
           <p className='inline-block text-xl text-blue-50 font-medium leading-relaxed mb-12 drop-shadow'>
             Streamline your campus placements. Connect top talent with leading recruiters effortlessly.
           </p>

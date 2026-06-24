@@ -1,46 +1,29 @@
-import {createBrowserRouter,RouterProvider} from 'react-router-dom'
-import Hero from './pages/Hero'
-import RecruiterDashboard from './pages/RecruiterDashboard'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import UpdateProfile from './pages/UpdateProfile'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Hero from "./pages/Hero";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import AuthContextProvider from "./context/AuthContextProvider";
+import Layout from "./components/Layout";
 
 function App() {
-  const router=createBrowserRouter([
-    
+  const router = createBrowserRouter([
     {
-      path:'/',
-      element:<Home/>,
-      children:[
-        {
-          index:true,
-          element:<Hero/>
-        },
-        {
-          path:'dashboard',
-          element:<RecruiterDashboard/>
-        },
-        {
-          path:'login',
-          element:<Login/>
-        },
-        {
-          path:'signup',
-          element:<Signup/>
-        },
-        {
-          path:'update-profile',
-          element:<UpdateProfile/>
-        }
-      ]
-    }
-  ])
+      path: "/",
+      element: <Layout />,
+      children: [
+        { index: true, element: <Hero /> },
+        { path: "dashboard", element: <Dashboard /> },
+        { path: "login", element: <Login /> },
+        { path: "signup", element: <Signup /> },
+      ],
+    },
+  ]);
   return (
-    <>
-     <RouterProvider router={router}/>
-    </>
-  )
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  );
 }
 
-export default App
+export default App;
