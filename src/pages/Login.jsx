@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from '../components/Input';
 import { FaEnvelope, FaLock, FaChartLine, FaBriefcase } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContextProvider';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ function Login() {
   });
 
   const [errors, setErrors] = useState({});
+
+  const {authLogin}=useAuth()
 
   const validate = () => {
     let newErrors = {};
@@ -25,11 +28,10 @@ function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (validate()) {
-      console.log("Login Submitted", formData);
-      
+      await authLogin(formData) 
     }
   };
 

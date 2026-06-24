@@ -1,30 +1,66 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
-import { registerUser } from "../services/auth.service";
+import { loginUser, logoutUser, registerUser } from "../services/auth.service";
 import { toast } from "react-toastify";
 
 function AuthContextProvider({children}) {
 
-    const [isAuthenticated,setIsAuthenticated]=useState(false)
-    const [user,setUser]=useState({})
+    const [user,setUser]=useState(null)
     const [authLoading,setAuthLoading]=useState(false);
 
-    const registerUser=async (userData) => {
+    const authRegister=async (userData) => {
       try {
-        const data=await registerUser(userData);
-        if(data?.success){
-          toast.success(data?.message)
+        setAuthLoading(true)
+        const resp=await registerUser(userData);
+        if(resp?.success){
+          toast.success(resp?.message)
+          setUser(resp?.data)
         }else{
-          toast.error(data?.message)
+          toast.error(resp?.message)
         }
-
       } catch (error) {
         toast.error(error?.message)
+      }finally{
+        setAuthLoading(false)
       }
-    } 
+    }
+    
+    const authLogin=async (userData) => {
+      try {
+        setAuthLoading(true)
+        const resp=await loginUser(userData);
+        if(resp?.success){
+          toast.success(resp?.message)
+          setUser(resp?.data)
+        }else{
+          toast.error(resp?.message)
+        }
+      } catch (error) {
+        toast.error(error?.message)
+      }finally{
+        setAuthLoading(false)
+      }
+    }
+
+    const authLogout=async(userData)=>{
+       try {
+        setAuthLoading(true)
+        const resp=await logoutUser(userData);
+        if(resp?.success){
+          toast.success(resp?.message)
+          setUser(null)
+        }else{
+          toast.error(resp?.message)
+        }
+      } catch (error) {
+        toast.error(error?.message)
+      }finally{
+        setAuthLoading(false)
+      }
+    }
 
   return (
-    <AuthContext value={{isAuthenticated,setIsAuthenticated}}>
+    <AuthContext value={{authRegister,authLogin,authLoading,authLogout ,user}}>
         {children}
     </AuthContext>
   )
