@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
-import { loginUser, logoutUser, registerUser } from "../services/auth.service";
+import { getUserProfile, loginUser, logoutUser, registerUser } from "../services/auth.service";
 import { toast } from "react-toastify";
 
 function AuthContextProvider({children}) {
@@ -42,10 +42,10 @@ function AuthContextProvider({children}) {
       }
     }
 
-    const authLogout=async(userData)=>{
+    const authLogout=async()=>{
        try {
         setAuthLoading(true)
-        const resp=await logoutUser(userData);
+        const resp=await logoutUser();
         if(resp?.success){
           toast.success(resp?.message)
           setUser(null)
@@ -59,8 +59,28 @@ function AuthContextProvider({children}) {
       }
     }
 
+    const fetchUserData=async () => {
+      try {
+        setAuthLoading(true)
+        const resp=await getUserProfile();
+        if(resp?.success){
+          console.log(resp?.data);
+          setUser(resp?.data);
+          // toast.success(resp?.message);
+        }else{
+          // setUser(null)
+          // toast.error(resp?.message);
+        }
+      } catch (error) {
+        // toast.error(error?.message)
+      }finally{
+        setAuthLoading(false)
+      }
+    }
+
+
   return (
-    <AuthContext value={{authRegister,authLogin,authLoading,authLogout ,user}}>
+    <AuthContext value={{authRegister,authLogin,authLoading,authLogout ,user,fetchUserData}}>
         {children}
     </AuthContext>
   )

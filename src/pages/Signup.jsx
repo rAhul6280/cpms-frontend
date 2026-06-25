@@ -3,6 +3,7 @@ import Input from '../components/Input';
 import { FaUserGraduate, FaUserTie, FaUser, FaEnvelope, FaLock } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContextProvider';
+import Loading from '../components/Loading';
 
 
 function Signup() {
@@ -62,7 +63,7 @@ function Signup() {
     }
   };
 
-  return (
+  return authLoading?<Loading/>:(
     <div className='w-full min-h-screen flex flex-col-reverse md:flex-row bg-gray-50 font-sans'>
       {/* Left Container - Form */}
       <div className='w-full md:w-1/2 flex flex-col justify-center items-center py-12 px-6 sm:px-12 lg:px-24 bg-white  z-10'>

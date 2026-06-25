@@ -3,6 +3,7 @@ import Input from '../components/Input';
 import { FaEnvelope, FaLock, FaChartLine, FaBriefcase } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContextProvider';
+import Loading from '../components/Loading';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ function Login() {
 
   const [errors, setErrors] = useState({});
 
-  const {authLogin}=useAuth()
+  const {authLogin,authLoading}=useAuth()
 
   const validate = () => {
     let newErrors = {};
@@ -44,7 +45,7 @@ function Login() {
     }
   };
 
-  return (
+  return authLoading?<Loading/>:  (
     <div className=' w-full min-h-screen flex  bg-gray-50 font-sans'>
       {/* Left/Bottom Container - Form */}
       <div className='  px-6  w-full   md:w-1/2 flex flex-col justify-center items-center py-12  sm:px-12 lg:px-24 bg-white  z-11'>

@@ -17,7 +17,12 @@ export async function loginUser(formData){
     return resp.data;
 }
 
-export async function logoutUser(params) {
+export async function logoutUser() {
     const resp=await api.post('/api/user/logout')
+    return resp.data;
+}
+
+export async function getUserProfile() {
+    const resp=await api.get('/api/user/get-me')
     return resp.data;
 }
