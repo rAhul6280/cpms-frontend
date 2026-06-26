@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { useNavigation } from 'react-router-dom'
 import Loading from './Loading'
 import {ToastContainer}from 'react-toastify'
+import NavBar from './NavBar'
 
 function Layout() {
     const navigation=useNavigation()
@@ -10,12 +11,11 @@ function Layout() {
     const isLoading = navigation.state==='loading'
 
   return isLoading?<Loading/>: (
-    <>
-    <ToastContainer 
-    position='bottom-right'
-    />
+    <div className=' relative '>
+   
+    <NavBar/>
     <Outlet/>
-    </>    
+    </div>    
   )
 }
 

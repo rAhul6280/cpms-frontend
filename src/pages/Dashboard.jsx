@@ -6,7 +6,7 @@ function Dashboard() {
 
   
 
-   const {authLoading,user,fetchUserData}=useAuth()
+   const {authLoading,user}=useAuth()
 
    useEffect(()=>{
     console.log(user);

@@ -1,11 +1,5 @@
-import axios from 'axios'
-const api=axios.create({
-    baseURL:'http://localhost:8000',
-    withCredentials:true,
-    headers:{
-        "Content-Type":'application/json'
-    }
-})
+import api from './api'
+
 
 export async function registerUser(formData) {
     const resp=await api.post('/api/user/register',formData);

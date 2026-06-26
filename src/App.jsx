@@ -29,28 +29,32 @@ function App() {
             </AuthLayout>
           ),
         },
-        {
-          path: "login",
-          element: (
-            <AuthLayout authentication={false}>
-              <Login/>
-            </AuthLayout>
-          ),
-        },
-        {
-          path: "signup",
-          element: (
-            <AuthLayout authentication={false}>
-              <Signup/>
-            </AuthLayout>
-          ),
-        },
       ],
+    },
+    {
+      path: "login",
+      element: (
+        <AuthLayout authentication={false}>
+          <Login/>
+        </AuthLayout>
+      ),
+    },
+    {
+      path: "signup",
+      element: (
+        <AuthLayout authentication={false}>
+          <Signup/>
+        </AuthLayout>
+      ),
     },
   ]);
   return (
     <AuthContextProvider>
       <RouterProvider router={router} />
+       <ToastContainer 
+        position='bottom-right'
+        className='z-[9999]'
+    />
     </AuthContextProvider>
   );
 }
