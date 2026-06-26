@@ -13,7 +13,14 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        { index: true, element: <Hero /> },
+        { 
+          index: true, 
+          element: (
+            <AuthLayout authentication={false}>
+              <Hero />
+            </AuthLayout>
+          ) 
+        },
         {
           path: "dashboard",
           element: (

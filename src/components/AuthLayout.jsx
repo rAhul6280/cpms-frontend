@@ -4,14 +4,10 @@ import {useNavigate} from 'react-router-dom'
 import Loading from './Loading';
 
 function AuthLayout({children,authentication}) {
-    const{user,authLoading,fetchUserData}=useAuth()
+    const{user,authLoading}=useAuth()
     const navigate=useNavigate();
 
-    useEffect(()=>{
-        if(!user){
-            fetchUserData()
-        }
-    },[])
+   
 
     useEffect(()=>{
         if(authLoading)return;

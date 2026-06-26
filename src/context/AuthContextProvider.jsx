@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 function AuthContextProvider({children}) {
 
     const [user,setUser]=useState(null)
-    const [authLoading,setAuthLoading]=useState(false);
+    const [authLoading,setAuthLoading]=useState(true);
 
     const authRegister=async (userData) => {
       try {
@@ -78,6 +78,11 @@ function AuthContextProvider({children}) {
       }
     }
 
+     useEffect(()=>{
+            if(!user){
+                fetchUserData()
+            }
+        },[])
 
   return (
     <AuthContext value={{authRegister,authLogin,authLoading,authLogout ,user,fetchUserData}}>

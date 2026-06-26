@@ -14,9 +14,9 @@ function Dashboard() {
   return authLoading?(<Loading/>): (
     <div>
       Welcome! to dashboard
-      {/* {user.fullName}
+      {user.fullName}
       {user.email}
-      {user.role} */}
+      {user.role}
     </div>
   )
 }
