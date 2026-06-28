@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from '../components/Input';
-import { FaUserGraduate, FaUserTie, FaUser, FaEnvelope, FaLock } from 'react-icons/fa6';
+import { FaUserGraduate, FaUserTie, FaUser, FaEnvelope, FaLock, FaArrowLeft } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContextProvider';
 import Loading from '../components/Loading';
@@ -66,7 +66,10 @@ function Signup() {
   return authLoading?<Loading/>:(
     <div className='w-full min-h-screen flex flex-col-reverse md:flex-row bg-gray-50 font-sans'>
       {/* Left Container - Form */}
-      <div className='w-full md:w-1/2 flex flex-col justify-center items-center py-12 px-6 sm:px-12 lg:px-24 bg-white  z-10'>
+      <div className='relative w-full md:w-1/2 flex flex-col justify-center items-center py-12 px-6 sm:px-12 lg:px-24 bg-white  z-10'>
+        <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 transition-colors shadow-sm" title="Back to Home">
+          <FaArrowLeft size={16} />
+        </Link>
         <div className='w-full max-w-md space-y-8'>
           <div className='text-center'>
             <h1 className='text-4xl font-extrabold text-gray-900 tracking-tight'>Create an Account</h1>

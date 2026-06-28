@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import AuthContextProvider from "./context/AuthContextProvider";
 import Layout from "./components/Layout";
 import AuthLayout from "./components/AuthLayout";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,16 +21,19 @@ function App() {
               <Hero />
             </AuthLayout>
           ) 
-        },
-        {
-          path: "dashboard",
-          element: (
-            <AuthLayout authentication={true}>
-              <Dashboard />
-            </AuthLayout>
-          ),
-        },
-      ],
+        }
+      ]
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <AuthLayout authentication={true}>
+          <Dashboard />
+        </AuthLayout>
+      ),
+      children: [
+        // We can add nested routes here if needed in future
+      ]
     },
     {
       path: "login",
@@ -53,7 +57,7 @@ function App() {
       <RouterProvider router={router} />
        <ToastContainer 
         position='bottom-right'
-        className='z-[9999]'
+        className='z-9999'
     />
     </AuthContextProvider>
   );

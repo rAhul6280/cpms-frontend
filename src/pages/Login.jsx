@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from '../components/Input';
-import { FaEnvelope, FaLock, FaChartLine, FaBriefcase } from 'react-icons/fa6';
+import { FaEnvelope, FaLock, FaChartLine, FaBriefcase, FaArrowLeft } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContextProvider';
 import Loading from '../components/Loading';
@@ -48,7 +48,10 @@ function Login() {
   return authLoading?<Loading/>:  (
     <div className=' w-full min-h-screen flex  bg-gray-50 font-sans'>
       {/* Left/Bottom Container - Form */}
-      <div className='  px-6  w-full   md:w-1/2 flex flex-col justify-center items-center py-12  sm:px-12 lg:px-24 bg-white  z-11'>
+      <div className='relative px-6  w-full   md:w-1/2 flex flex-col justify-center items-center py-12  sm:px-12 lg:px-24 bg-white  z-11'>
+        <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 transition-colors shadow-sm" title="Back to Home">
+          <FaArrowLeft size={16} />
+        </Link>
         <div className='w-full  rounded-lg max-w-md space-y-8'>
           <div className='text-center'>
             <h1 className='text-4xl font-extrabold text-gray-900 tracking-tight'>Welcome Back</h1>
