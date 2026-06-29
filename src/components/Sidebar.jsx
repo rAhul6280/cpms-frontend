@@ -14,7 +14,7 @@ function Sidebar({ isOpen, setIsOpen }) {
     { name: 'Dashboard', path: '/dashboard', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
     { name: 'Browse Students', path: '/dashboard/students', icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' },
     { name: 'My Selections', path: '/dashboard/selections', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
-    { name: 'Update Profile', path: '/dashboard/profile', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' }
+    // { name: 'Update Profile', path: '/dashboard/profile', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' }
   ];
 
   const links = user?.role === 'recruiter' ? recruiterLinks : studentLinks;
@@ -41,9 +41,9 @@ function Sidebar({ isOpen, setIsOpen }) {
                 end={link.path === '/dashboard'}
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 ${
+                  `flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all border-transparent ${
                     isActive
-                      ? 'bg-linear-to-r from-indigo-50 to-blue-50 text-indigo-700 shadow-sm border border-indigo-100/50'
+                      ? 'bg-linear-to-r from-indigo-50 to-blue-50 text-indigo-700 shadow-lg shadow-indigo-400/30 border border-indigo-500/40 '
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   }`
                 }

@@ -6,7 +6,13 @@ import Dashboard from "./pages/Dashboard";
 import AuthContextProvider from "./context/AuthContextProvider";
 import Layout from "./components/Layout";
 import AuthLayout from "./components/AuthLayout";
+import RoleProtectedRoute from "./components/RoleProtectedRoute";
 import { ToastContainer } from "react-toastify";
+import DashboardHome from "./components/dashboard/DashboardHome";
+import Profile from "./components/dashboard/Profile";
+import BrowseStudents from "./components/dashboard/BrowseStudents";
+import StudentDetails from "./components/dashboard/StudentDetails";
+import MySelections from "./components/dashboard/MySelections";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,13 +20,13 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        { 
-          index: true, 
+        {
+          index: true,
           element: (
             <AuthLayout authentication={false}>
               <Hero />
             </AuthLayout>
-          ) 
+          )
         }
       ]
     },
@@ -32,14 +38,49 @@ function App() {
         </AuthLayout>
       ),
       children: [
-        // We can add nested routes here if needed in future
+        {
+          index: true,
+          element: <DashboardHome />
+        },
+        {
+          path: "profile",
+          element:(
+         <RoleProtectedRoute allowedRoles={['student']}>
+              <Profile />
+            </RoleProtectedRoute>
+          )
+        },
+        {
+          path: "students",
+          element: (
+            <RoleProtectedRoute allowedRoles={['recruiter']}>
+              <BrowseStudents />
+            </RoleProtectedRoute>
+          )
+        },
+        {
+          path: "students/:studentId",
+          element: (
+            <RoleProtectedRoute allowedRoles={['recruiter']}>
+              <StudentDetails />
+            </RoleProtectedRoute>
+          )
+        },
+        {
+          path: "selections",
+          element: (
+            <RoleProtectedRoute allowedRoles={['recruiter']}>
+              <MySelections />
+            </RoleProtectedRoute>
+          )
+        }
       ]
     },
     {
       path: "login",
       element: (
         <AuthLayout authentication={false}>
-          <Login/>
+          <Login />
         </AuthLayout>
       ),
     },
@@ -47,18 +88,19 @@ function App() {
       path: "signup",
       element: (
         <AuthLayout authentication={false}>
-          <Signup/>
+          <Signup />
         </AuthLayout>
       ),
     },
   ]);
+
   return (
     <AuthContextProvider>
       <RouterProvider router={router} />
-       <ToastContainer 
+      <ToastContainer
         position='bottom-right'
         className='z-9999'
-    />
+      />
     </AuthContextProvider>
   );
 }
