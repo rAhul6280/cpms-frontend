@@ -15,6 +15,15 @@ function AuthLayout({children,authentication}) {
         else if(!authentication && user)navigate('/dashboard')    
 
     },[user,authentication,authLoading])
+    
+    if (authentication && !user) {
+        return <Loading /> 
+    }
+
+    if (!authentication && user) {
+            return <Loading />
+        }
+
 
   return  authLoading?<Loading/>:children
     
