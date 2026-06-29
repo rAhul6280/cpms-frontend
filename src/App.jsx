@@ -13,6 +13,7 @@ import Profile from "./components/dashboard/Profile";
 import BrowseStudents from "./components/dashboard/BrowseStudents";
 import StudentDetails from "./components/dashboard/StudentDetails";
 import MySelections from "./components/dashboard/MySelections";
+import AdminSelections from "./components/dashboard/AdminSelections";
 
 function App() {
   const router = createBrowserRouter([
@@ -71,6 +72,14 @@ function App() {
           element: (
             <RoleProtectedRoute allowedRoles={['recruiter']}>
               <MySelections />
+            </RoleProtectedRoute>
+          )
+        },
+        {
+          path: "admin/selections",
+          element: (
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminSelections />
             </RoleProtectedRoute>
           )
         }

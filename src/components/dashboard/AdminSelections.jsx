@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getMySelections } from '../../services/recruiter.service';
+import { getAllSelections, getFilteredSelections, updateSelectionStatus } from '../../services/admin.service';
 import { toast } from 'react-toastify';
-import { FaUserGraduate, FaBriefcase, FaMoneyBillWave, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaClock, FaFilter, FaArrowRight } from 'react-icons/fa';
+import { FaUserGraduate, FaBriefcase, FaMoneyBillWave, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaClock, FaFilter, FaBuilding } from 'react-icons/fa';
 
-function MySelections() {
+function AdminSelections() {
   const [selections, setSelections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState('all');
-  const navigate = useNavigate();
+  const [processingId, setProcessingId] = useState(null);
 
   const fetchSelections = async (status = 'all') => {
     setLoading(true);
     try {
-      const response = await getMySelections(status);
+      const response = status === 'all' 
+        ? await getAllSelections() 
+        : await getFilteredSelections(status);
+        
       if (response.success) {
         setSelections(response.data);
       }
@@ -30,6 +32,26 @@ function MySelections() {
 
   const handleFilterChange = (status) => {
     setFilterStatus(status);
+  };
+
+  const handleUpdateStatus = async (selectionId, newStatus) => {
+    setProcessingId(selectionId);
+    try {
+      const response = await updateSelectionStatus(selectionId, newStatus);
+      if (response.success) {
+        toast.success(`Selection ${newStatus} successfully!`);
+        // Refresh list or update locally
+        setSelections(prev => 
+          prev.map(sel => 
+            sel._id === selectionId ? { ...sel, status: newStatus } : sel
+          )
+        );
+      }
+    } catch (error) {
+      toast.error(error.message || `Failed to ${newStatus} selection`);
+    } finally {
+      setProcessingId(null);
+    }
   };
 
   const getStatusStyle = (status) => {
@@ -68,9 +90,9 @@ function MySelections() {
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
               <FaBriefcase className="mr-3 text-indigo-600" />
-              My Selections
+              Manage Selections
             </h2>
-            <p className="text-gray-500">Track and manage the students you have selected or hired.</p>
+            <p className="text-gray-500">Review, approve, or reject student hiring selections across all recruiters.</p>
           </div>
           
           <div className="mt-4 md:mt-0 flex items-center bg-gray-50 p-1.5 rounded-xl border border-gray-200">
@@ -104,20 +126,14 @@ function MySelections() {
                 <FaUserGraduate className="text-4xl text-gray-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No selections found</h3>
-              <p className="text-gray-500 mb-6">You haven't selected any students {filterStatus !== 'all' ? `with ${filterStatus} status` : 'yet'}.</p>
-              <button 
-                onClick={() => navigate('/recruiter/dashboard/students')}
-                className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors inline-flex items-center"
-              >
-                Browse Students <FaArrowRight className="ml-2" />
-              </button>
+              <p className="text-gray-500">There are no selections {filterStatus !== 'all' ? `with ${filterStatus} status` : 'yet'}.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {selections.map((selection) => (
                 <div 
                   key={selection._id} 
-                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full"
+                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full"
                 >
                   <div className={`h-2 w-full ${
                     selection.status === 'approved' ? 'bg-green-500' : 
@@ -136,7 +152,7 @@ function MySelections() {
                           <h3 className="text-lg font-bold text-gray-900 leading-tight">
                             {selection.student?.fullName || 'Unknown Student'}
                           </h3>
-                          <p className="text-sm text-gray-500 truncate w-32 md:w-40">
+                          <p className="text-sm text-gray-500 truncate w-32 md:w-48">
                             {selection.student?.user?.email || 'No email'}
                           </p>
                         </div>
@@ -150,32 +166,48 @@ function MySelections() {
                     
                     <div className="space-y-3 flex-1 bg-gray-50 p-4 rounded-xl border border-gray-100">
                       <div className="flex items-center text-sm">
+                        <FaBuilding className="w-4 h-4 text-indigo-400 mr-3" />
+                        <span className="text-gray-600 font-medium w-24">Recruiter:</span>
+                        <span className="text-gray-900 font-semibold truncate flex-1">{selection.recruiter?.fullName || 'Unknown Company'}</span>
+                      </div>
+
+                      <div className="flex items-center text-sm">
                         <FaBriefcase className="w-4 h-4 text-indigo-400 mr-3" />
-                        <span className="text-gray-600 font-medium w-16">Role:</span>
+                        <span className="text-gray-600 font-medium w-24">Role:</span>
                         <span className="text-gray-900 font-semibold">{selection.selectionRole || 'N/A'}</span>
                       </div>
                       
                       <div className="flex items-center text-sm">
                         <FaMoneyBillWave className="w-4 h-4 text-indigo-400 mr-3" />
-                        <span className="text-gray-600 font-medium w-16">CTC:</span>
+                        <span className="text-gray-600 font-medium w-24">CTC:</span>
                         <span className="text-gray-900 font-semibold">{selection.ctc ? `${selection.ctc} LPA` : 'N/A'}</span>
                       </div>
                       
                       <div className="flex items-center text-sm">
                         <FaCalendarAlt className="w-4 h-4 text-indigo-400 mr-3" />
-                        <span className="text-gray-600 font-medium w-16">Date:</span>
+                        <span className="text-gray-600 font-medium w-24">Date:</span>
                         <span className="text-gray-900">{formatDate(selection.createdAt)}</span>
                       </div>
                     </div>
                     
-                    <div className="mt-5 pt-4 border-t border-gray-100">
-                      <button 
-                        onClick={() => navigate(`/recruiter/dashboard/students/${selection.student?._id}`)}
-                        className="w-full py-2.5 text-center text-indigo-600 font-semibold rounded-xl hover:bg-indigo-50 transition-colors border border-transparent hover:border-indigo-100 flex items-center justify-center"
-                      >
-                        View Profile <FaArrowRight className="ml-2 text-sm" />
-                      </button>
-                    </div>
+                    {selection.status === 'pending' && (
+                      <div className="mt-5 pt-4 border-t border-gray-100 flex gap-3">
+                        <button 
+                          disabled={processingId === selection._id}
+                          onClick={() => handleUpdateStatus(selection._id, 'approved')}
+                          className="flex-1 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-colors flex items-center justify-center disabled:opacity-70"
+                        >
+                          {processingId === selection._id ? 'Processing...' : 'Approve'}
+                        </button>
+                        <button 
+                          disabled={processingId === selection._id}
+                          onClick={() => handleUpdateStatus(selection._id, 'rejected')}
+                          className="flex-1 py-2.5 bg-red-100 hover:bg-red-200 text-red-700 font-semibold rounded-xl transition-colors flex items-center justify-center disabled:opacity-70"
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -187,4 +219,4 @@ function MySelections() {
   );
 }
 
-export default MySelections;
+export default AdminSelections;
