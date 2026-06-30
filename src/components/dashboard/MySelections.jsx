@@ -170,7 +170,7 @@ function MySelections() {
                     
                     <div className="mt-5 pt-4 border-t border-gray-100">
                       <button 
-                        onClick={() => navigate(`/recruiter/dashboard/students/${selection.student?._id}`)}
+                        onClick={() => navigate(`/dashboard/students/${selection.student?._id}`)}
                         className="w-full py-2.5 text-center text-indigo-600 font-semibold rounded-xl hover:bg-indigo-50 transition-colors border border-transparent hover:border-indigo-100 flex items-center justify-center"
                       >
                         View Profile <FaArrowRight className="ml-2 text-sm" />
