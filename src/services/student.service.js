@@ -24,3 +24,12 @@ export const updateResume = async (resumeFile) => {
         throw error.response?.data || error;
     }
 };
+
+export const getStudentSelections = async () => {
+    try {
+        const response = await api.get('/api/student/selections');
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error;
+    }
+};

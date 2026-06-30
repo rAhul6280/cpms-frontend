@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getMySelections } from '../../services/recruiter.service';
+import { getStudentSelections } from '../../services/student.service';
 import { toast } from 'react-toastify';
-import { FaUserGraduate, FaBriefcase, FaMoneyBillWave, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaClock, FaFilter, FaArrowRight } from 'react-icons/fa';
+import { FaBuilding, FaBriefcase, FaMoneyBillWave, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaClock, FaFilter } from 'react-icons/fa';
 
-function MySelections() {
+function StudentSelections() {
   const [selections, setSelections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState('all');
-  const navigate = useNavigate();
 
-  const fetchSelections = async (status = 'all') => {
+  const fetchSelections = async () => {
     setLoading(true);
     try {
-      const response = await getMySelections(status);
+      const response = await getStudentSelections();
       if (response.success) {
         setSelections(response.data);
       }
@@ -25,12 +23,16 @@ function MySelections() {
   };
 
   useEffect(() => {
-    fetchSelections(filterStatus);
-  }, [filterStatus]);
+    fetchSelections();
+  }, []);
 
   const handleFilterChange = (status) => {
     setFilterStatus(status);
   };
+
+  const filteredSelections = filterStatus === 'all' 
+    ? selections 
+    : selections.filter(s => s.status === filterStatus);
 
   const getStatusStyle = (status) => {
     switch (status) {
@@ -68,9 +70,9 @@ function MySelections() {
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
               <FaBriefcase className="mr-3 text-indigo-600" />
-              My Selections
+              My Applications & Selections
             </h2>
-            <p className="text-gray-500">Track and manage the students you have selected or hired.</p>
+            <p className="text-gray-500">Track your selection status with various companies.</p>
           </div>
           
           <div className="mt-4 md:mt-0 flex items-center bg-gray-50 p-1.5 rounded-xl border border-gray-200">
@@ -98,23 +100,21 @@ function MySelections() {
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
             </div>
-          ) : selections.length === 0 ? (
+          ) : filteredSelections.length === 0 ? (
             <div className="text-center py-20 bg-gray-50 rounded-2xl border border-dashed border-gray-300">
               <div className="inline-block p-6 rounded-full bg-white shadow-sm mb-4">
-                <FaUserGraduate className="text-4xl text-gray-400" />
+                <FaBuilding className="text-4xl text-gray-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No selections found</h3>
-              <p className="text-gray-500 mb-6">You haven't selected any students {filterStatus !== 'all' ? `with ${filterStatus} status` : 'yet'}.</p>
-              <button 
-                onClick={() => navigate('/dashboard/students')}
-                className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors inline-flex items-center"
-              >
-                Browse Students <FaArrowRight className="ml-2" />
-              </button>
+              <p className="text-gray-500 mb-6">
+                {filterStatus !== 'all' 
+                  ? `You don't have any applications with ${filterStatus} status.` 
+                  : 'You haven\'t been selected by any companies yet. Keep applying!'}
+              </p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {selections.map((selection) => (
+              {filteredSelections.map((selection) => (
                 <div 
                   key={selection._id} 
                   className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full"
@@ -128,17 +128,14 @@ function MySelections() {
                     <div className="flex justify-between items-start mb-5">
                       <div className="flex items-center space-x-4">
                         <img 
-                          src={selection.student?.avatar || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} 
-                          alt="Student Avatar" 
+                          src={selection.recruiter?.avatar || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} 
+                          alt="Company Avatar" 
                           className="w-14 h-14 rounded-full object-cover border-2 border-gray-100 shadow-sm"
                         />
                         <div>
                           <h3 className="text-lg font-bold text-gray-900 leading-tight">
-                            {selection.student?.fullName || 'Unknown Student'}
+                            {selection.recruiter?.fullName || 'Unknown Company'}
                           </h3>
-                          <p className="text-sm text-gray-500 truncate w-32 md:w-40">
-                            {selection.student?.user?.email || 'No email'}
-                          </p>
                         </div>
                       </div>
                       
@@ -167,15 +164,6 @@ function MySelections() {
                         <span className="text-gray-900">{formatDate(selection.createdAt)}</span>
                       </div>
                     </div>
-                    
-                    <div className="mt-5 pt-4 border-t border-gray-100">
-                      <button 
-                        onClick={() => navigate(`/recruiter/dashboard/students/${selection.student?._id}`)}
-                        className="w-full py-2.5 text-center text-indigo-600 font-semibold rounded-xl hover:bg-indigo-50 transition-colors border border-transparent hover:border-indigo-100 flex items-center justify-center"
-                      >
-                        View Profile <FaArrowRight className="ml-2 text-sm" />
-                      </button>
-                    </div>
                   </div>
                 </div>
               ))}
@@ -187,4 +175,4 @@ function MySelections() {
   );
 }
 
-export default MySelections;
+export default StudentSelections;

@@ -19,7 +19,7 @@ function AuthContextProvider({children}) {
           toast.error(resp?.message)
         }
       } catch (error) {
-        toast.error(error?.message)
+        toast.error(error?.response?.data?.message)
       }finally{
         setAuthLoading(false)
       }
@@ -29,6 +29,7 @@ function AuthContextProvider({children}) {
       try {
         setAuthLoading(true)
         const resp=await loginUser(userData);
+        
         if(resp?.success){
           toast.success(resp?.message)
           setUser(resp?.data)
@@ -36,7 +37,7 @@ function AuthContextProvider({children}) {
           toast.error(resp?.message)
         }
       } catch (error) {
-        toast.error(error?.message)
+        toast.error(error?.response?.data?.message)
       }finally{
         setAuthLoading(false)
       }
@@ -53,7 +54,7 @@ function AuthContextProvider({children}) {
           toast.error(resp?.message)
         }
       } catch (error) {
-        toast.error(error?.message)
+        toast.error(error?.response?.data?.message)
       }finally{
         setAuthLoading(false)
       }

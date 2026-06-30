@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import api from './api'
 
 
@@ -7,8 +8,8 @@ export async function registerUser(formData) {
 }
 
 export async function loginUser(formData){
-    const resp=await api.post('/api/user/login',formData);
-    return resp.data;
+        const resp=await api.post('/api/user/login',formData);
+        return resp.data;
 }
 
 export async function logoutUser() {

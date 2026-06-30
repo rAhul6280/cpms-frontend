@@ -14,6 +14,7 @@ import BrowseStudents from "./components/dashboard/BrowseStudents";
 import StudentDetails from "./components/dashboard/StudentDetails";
 import MySelections from "./components/dashboard/MySelections";
 import AdminSelections from "./components/dashboard/AdminSelections";
+import StudentSelections from "./components/dashboard/StudentSelections";
 
 function App() {
   const router = createBrowserRouter([
@@ -48,6 +49,14 @@ function App() {
           element:(
          <RoleProtectedRoute allowedRoles={['student']}>
               <Profile />
+            </RoleProtectedRoute>
+          )
+        },
+        {
+          path: "student-selections",
+          element: (
+            <RoleProtectedRoute allowedRoles={['student']}>
+              <StudentSelections />
             </RoleProtectedRoute>
           )
         },
