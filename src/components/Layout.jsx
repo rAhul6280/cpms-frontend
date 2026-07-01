@@ -11,7 +11,7 @@ function Layout() {
     const isLoading = navigation.state==='loading'
 
   return isLoading?<Loading/>: (
-    <div className=' relative '>
+    <div className='relative min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100'>
    
     <NavBar/>
     <Outlet/>

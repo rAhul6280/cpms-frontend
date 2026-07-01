@@ -15,6 +15,19 @@ import StudentDetails from "./components/dashboard/StudentDetails";
 import MySelections from "./components/dashboard/MySelections";
 import AdminSelections from "./components/dashboard/AdminSelections";
 import StudentSelections from "./components/dashboard/StudentSelections";
+import { useEffect } from "react";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
+
+function ThemedToastContainer() {
+  const { theme } = useTheme();
+  return (
+    <ToastContainer
+      position='bottom-right'
+      theme={theme === 'dark' ? 'dark' : 'light'}
+      className='z-9999'
+    />
+  );
+}
 
 function App() {
   const router = createBrowserRouter([
@@ -113,13 +126,12 @@ function App() {
   ]);
 
   return (
-    <AuthContextProvider>
-      <RouterProvider router={router} />
-      <ToastContainer
-        position='bottom-right'
-        className='z-9999'
-      />
-    </AuthContextProvider>
+    <ThemeProvider>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+        <ThemedToastContainer />
+      </AuthContextProvider>
+    </ThemeProvider>
   );
 }
 

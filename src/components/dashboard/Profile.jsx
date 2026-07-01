@@ -135,43 +135,43 @@ function Profile() {
   return (
     <div className="space-y-6">
       {/* Profile Update Section */}
-      <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Profile Information</h2>
-        <p className="text-gray-500 mb-6">Update your personal and academic details below.</p>
+      <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Profile Information</h2>
+        <p className="text-gray-500 dark:text-gray-400 mb-6">Update your personal and academic details below.</p>
         
         <form onSubmit={handleProfileSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-              <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name *</label>
+              <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Roll Number *</label>
-              <input type="text" name="rollNumber" value={formData.rollNumber} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Roll Number *</label>
+              <input type="text" name="rollNumber" value={formData.rollNumber} onChange={handleChange} required className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Degree *</label>
-              <input type="text" name="degree" value={formData.degree} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g. B.Tech" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Degree *</label>
+              <input type="text" name="degree" value={formData.degree} onChange={handleChange} required className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:placeholder:text-gray-500" placeholder="e.g. B.Tech" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Branch *</label>
-              <input type="text" name="branch" value={formData.branch} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g. Computer Science" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Branch *</label>
+              <input type="text" name="branch" value={formData.branch} onChange={handleChange} required className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:placeholder:text-gray-500" placeholder="e.g. Computer Science" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">CGPA *</label>
-              <input type="number" step="0.01" name="cgpa" value={formData.cgpa} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CGPA *</label>
+              <input type="number" step="0.01" name="cgpa" value={formData.cgpa} onChange={handleChange} required className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
-              <input type="number" name="age" value={formData.age} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Age</label>
+              <input type="number" name="age" value={formData.age} onChange={handleChange} className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Skills * (Press Enter or Comma to add)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Skills * (Press Enter or Comma to add)</label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {formData.skills.map((skill, index) => (
-                  <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400">
                     {skill}
-                    <button type="button" onClick={() => removeSkill(skill)} className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full text-blue-400 hover:bg-blue-200 hover:text-blue-900 focus:outline-none">
+                    <button type="button" onClick={() => removeSkill(skill)} className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full text-blue-400 dark:text-blue-500 hover:bg-blue-200 dark:hover:bg-blue-800 hover:text-blue-900 dark:hover:text-blue-200 focus:outline-none">
                       <span className="sr-only">Remove skill</span>
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path>
@@ -185,14 +185,14 @@ function Profile() {
                 value={skillInput} 
                 onChange={handleSkillInputChange} 
                 onKeyDown={handleSkillKeyDown}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:placeholder:text-gray-500" 
                 placeholder="Type a skill and press Enter..." 
               />
             </div>
             <div className="md:col-span-2">
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-medium text-gray-700">Projects</label>
-                <button type="button" onClick={addProject} className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Projects</label>
+                <button type="button" onClick={addProject} className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium flex items-center">
                   <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>
                   Add Project
                 </button>
@@ -200,31 +200,31 @@ function Profile() {
               
               <div className="space-y-4">
                 {formData.projectDetails.length === 0 ? (
-                  <p className="text-sm text-gray-500 italic">No projects added yet.</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 italic">No projects added yet.</p>
                 ) : (
                   formData.projectDetails.map((project, index) => (
-                    <div key={index} className="p-4 border rounded-xl bg-gray-50 relative">
-                      <button type="button" onClick={() => removeProject(index)} className="absolute top-3 right-3 text-red-500 hover:text-red-700">
+                    <div key={index} className="p-4 border dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800/50 relative">
+                      <button type="button" onClick={() => removeProject(index)} className="absolute top-3 right-3 text-red-500 hover:text-red-700 dark:hover:text-red-400">
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                       </button>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                         <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Title *</label>
-                          <input type="text" value={project.title} onChange={(e) => handleProjectChange(index, 'title', e.target.value)} required className="w-full px-3 py-1.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" placeholder="Project Title" />
+                          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Title *</label>
+                          <input type="text" value={project.title} onChange={(e) => handleProjectChange(index, 'title', e.target.value)} required className="w-full px-3 py-1.5 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm dark:placeholder:text-gray-500" placeholder="Project Title" />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">GitHub Link</label>
-                          <input type="url" value={project.githubLink} onChange={(e) => handleProjectChange(index, 'githubLink', e.target.value)} className="w-full px-3 py-1.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" placeholder="https://github.com/..." />
+                          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">GitHub Link</label>
+                          <input type="url" value={project.githubLink} onChange={(e) => handleProjectChange(index, 'githubLink', e.target.value)} className="w-full px-3 py-1.5 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm dark:placeholder:text-gray-500" placeholder="https://github.com/..." />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Live Link</label>
-                          <input type="url" value={project.liveLink} onChange={(e) => handleProjectChange(index, 'liveLink', e.target.value)} className="w-full px-3 py-1.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" placeholder="https://..." />
+                          <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Live Link</label>
+                          <input type="url" value={project.liveLink} onChange={(e) => handleProjectChange(index, 'liveLink', e.target.value)} className="w-full px-3 py-1.5 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm dark:placeholder:text-gray-500" placeholder="https://..." />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1">Description</label>
-                        <textarea value={project.description} onChange={(e) => handleProjectChange(index, 'description', e.target.value)} rows="2" className="w-full px-3 py-1.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" placeholder="Briefly describe the project..."></textarea>
+                        <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Description</label>
+                        <textarea value={project.description} onChange={(e) => handleProjectChange(index, 'description', e.target.value)} rows="2" className="w-full px-3 py-1.5 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm dark:placeholder:text-gray-500" placeholder="Briefly describe the project..."></textarea>
                       </div>
                     </div>
                   ))
@@ -232,8 +232,8 @@ function Profile() {
               </div>
             </div>
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-              <input type="text" name="address" value={formData.address} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
+              <input type="text" name="address" value={formData.address} onChange={handleChange} className="w-full px-4 py-2 border dark:border-gray-700 dark:bg-gray-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
           </div>
           
@@ -246,9 +246,9 @@ function Profile() {
       </div>
 
       {/* Resume Upload Section */}
-      <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Resume</h2>
-        <p className="text-gray-500 mb-4">Upload or update your resume (PDF/DOCX).</p>
+      <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Resume</h2>
+        <p className="text-gray-500 dark:text-gray-400 mb-4">Upload or update your resume (PDF/DOCX).</p>
         
         {user?.profile?.resume && (
           <div className="mb-4">
@@ -264,7 +264,7 @@ function Profile() {
             type="file" 
             accept=".pdf,.doc,.docx" 
             onChange={handleResumeChange} 
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-400 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50"
           />
           <button type="submit" disabled={resumeLoading || !resumeFile} className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition disabled:opacity-50 whitespace-nowrap">
             {resumeLoading ? 'Uploading...' : 'Upload Resume'}

@@ -74,9 +74,9 @@ function StudentDetails() {
 
   if (!student) {
     return (
-      <div className="text-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Student not found</h3>
-        <button onClick={() => navigate(-1)} className="text-indigo-600 hover:underline">Go Back</button>
+      <div className="text-center py-20 bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Student not found</h3>
+        <button onClick={() => navigate(-1)} className="text-indigo-600 dark:text-indigo-400 hover:underline">Go Back</button>
       </div>
     );
   }
@@ -85,7 +85,7 @@ function StudentDetails() {
     <div className="space-y-6">
       <button 
         onClick={() => navigate(-1)}
-        className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors mb-4"
+        className="flex items-center text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mb-4"
       >
         <FaArrowLeft className="mr-2" /> Back to Students
       </button>
@@ -93,22 +93,22 @@ function StudentDetails() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Column: Profile Info */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center">
-            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-indigo-50 mb-4">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 p-8 flex flex-col items-center text-center">
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-indigo-50 dark:border-indigo-900/50 mb-4">
               <img 
                 src={student.avatar || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} 
                 alt={student.fullName} 
                 className="w-full h-full object-cover"
               />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">{student.fullName}</h2>
-            <p className="text-gray-500 mb-4">{student.user?.email}</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{student.fullName}</h2>
+            <p className="text-gray-500 dark:text-gray-400 mb-4">{student.user?.email}</p>
             
             <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <span className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+              <span className="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 px-3 py-1 rounded-full text-sm font-medium flex items-center">
                 <FaStar className="mr-1 text-yellow-500" /> CGPA: {student.cgpa || 'N/A'}
               </span>
-              <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+              <span className="bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium flex items-center">
                 <FaUserGraduate className="mr-1" /> {student.degree || 'Degree'}
               </span>
             </div>
@@ -118,42 +118,42 @@ function StudentDetails() {
                 href={student.resume} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 <FaFilePdf className="mr-2 text-red-500" /> View Resume
               </a>
             )}
           </div>
 
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-            <h3 className="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Personal Details</h3>
+          <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 border-b dark:border-gray-800 pb-2">Personal Details</h3>
             <div className="space-y-4 text-sm">
               <div className="flex items-start">
-                <FaIdCard className="text-gray-400 mt-1 mr-3 w-5 h-5" />
+                <FaIdCard className="text-gray-400 dark:text-gray-500 mt-1 mr-3 w-5 h-5" />
                 <div>
-                  <p className="text-gray-500 font-medium">Roll Number</p>
-                  <p className="text-gray-900">{student.rollNumber || 'Not provided'}</p>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium">Roll Number</p>
+                  <p className="text-gray-900 dark:text-white">{student.rollNumber || 'Not provided'}</p>
                 </div>
               </div>
               <div className="flex items-start">
-                <FaBook className="text-gray-400 mt-1 mr-3 w-5 h-5" />
+                <FaBook className="text-gray-400 dark:text-gray-500 mt-1 mr-3 w-5 h-5" />
                 <div>
-                  <p className="text-gray-500 font-medium">Branch</p>
-                  <p className="text-gray-900">{student.branch || 'Not provided'}</p>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium">Branch</p>
+                  <p className="text-gray-900 dark:text-white">{student.branch || 'Not provided'}</p>
                 </div>
               </div>
               <div className="flex items-start">
-                <FaUserGraduate className="text-gray-400 mt-1 mr-3 w-5 h-5" />
+                <FaUserGraduate className="text-gray-400 dark:text-gray-500 mt-1 mr-3 w-5 h-5" />
                 <div>
-                  <p className="text-gray-500 font-medium">Age</p>
-                  <p className="text-gray-900">{student.age || 'Not provided'}</p>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium">Age</p>
+                  <p className="text-gray-900 dark:text-white">{student.age || 'Not provided'}</p>
                 </div>
               </div>
               <div className="flex items-start">
-                <FaMapMarkerAlt className="text-gray-400 mt-1 mr-3 w-5 h-5" />
+                <FaMapMarkerAlt className="text-gray-400 dark:text-gray-500 mt-1 mr-3 w-5 h-5" />
                 <div>
-                  <p className="text-gray-500 font-medium">Address</p>
-                  <p className="text-gray-900">{student.address || 'Not provided'}</p>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium">Address</p>
+                  <p className="text-gray-900 dark:text-white">{student.address || 'Not provided'}</p>
                 </div>
               </div>
             </div>
@@ -163,9 +163,9 @@ function StudentDetails() {
         {/* Right Column: Skills, Projects, and Hiring */}
         <div className="lg:col-span-2 space-y-6">
           
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold text-gray-900 flex items-center">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
                 <FaCode className="mr-2 text-indigo-600" /> Skills
               </h3>
             </div>
@@ -173,30 +173,30 @@ function StudentDetails() {
             <div className="flex flex-wrap gap-2">
               {student.skills && student.skills.length > 0 ? (
                 student.skills.map((skill, index) => (
-                  <span key={index} className="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-xl text-sm font-medium">
+                  <span key={index} className="px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 rounded-xl text-sm font-medium">
                     {skill}
                   </span>
                 ))
               ) : (
-                <p className="text-gray-500">No skills listed</p>
+                <p className="text-gray-500 dark:text-gray-400">No skills listed</p>
               )}
             </div>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+          <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 p-8">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
               <FaBriefcase className="mr-2 text-indigo-600" /> Projects
             </h3>
             
             {student.projectDetails && student.projectDetails.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {student.projectDetails.map((project, index) => (
-                  <div key={index} className="p-5 rounded-2xl border border-gray-100 bg-gray-50 hover:shadow-md transition-shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">{project.title}</h4>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-3">{project.description}</p>
+                  <div key={index} className="p-5 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 hover:shadow-md transition-shadow">
+                    <h4 className="font-bold text-gray-900 dark:text-white mb-2">{project.title}</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">{project.description}</p>
                     <div className="flex space-x-3">
                       {project.githubLink && (
-                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-900">
+                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">
                           <FaGithub className="w-5 h-5" />
                         </a>
                       )}
@@ -210,7 +210,7 @@ function StudentDetails() {
                 ))}
               </div>
             ) : (
-              <p className="text-gray-500">No projects listed</p>
+              <p className="text-gray-500 dark:text-gray-400">No projects listed</p>
             )}
           </div>
 

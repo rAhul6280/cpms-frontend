@@ -1,19 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContextProvider';
+import { useTheme } from '../context/ThemeContext';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 function DashboardNavBar({ onMenuClick }) {
   const { user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <nav className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
+    <nav className="sticky top-0 z-40 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm transition-all duration-300">
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             {/* Hamburger for mobile */}
             <button
               onClick={onMenuClick}
-              className="p-2 mr-3 text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-2 mr-3 text-gray-500 dark:text-gray-400 rounded-lg lg:hidden hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -33,15 +36,24 @@ function DashboardNavBar({ onMenuClick }) {
             </Link>
           </div>
           
-          <div className="flex items-center">
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Theme Toggle */}
+            <button 
+              onClick={toggleTheme} 
+              className="p-2 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+              aria-label="Toggle Dark Mode"
+            >
+               {theme === 'dark' ? <FaSun size={18} /> : <FaMoon size={18} />}
+            </button>
+
             {/* User Avatar & Name */}
             {user && (
               <div className="flex items-center gap-3">
                 <div className="hidden sm:flex flex-col items-end">
-                  <span className="text-sm font-bold text-gray-900">{user?.profile?.fullName}</span>
-                  <span className="text-xs font-medium text-indigo-600 capitalize">{user?.role}</span>
+                  <span className="text-sm font-bold text-gray-900 dark:text-white">{user?.profile?.fullName}</span>
+                  <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400 capitalize">{user?.role}</span>
                 </div>
-                <button className="relative w-10 h-10 rounded-full bg-linear-to-r from-indigo-100 to-blue-100 border border-indigo-200 flex items-center justify-center text-indigo-700 font-bold uppercase overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-105">
+                <button className="relative w-10 h-10 rounded-full bg-linear-to-r from-indigo-100 to-blue-100 dark:from-indigo-900/50 dark:to-blue-900/50 border border-indigo-200 dark:border-indigo-800 flex items-center justify-center text-indigo-700 dark:text-indigo-300 font-bold uppercase overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 transform hover:scale-105">
                    {user?.profile?.avatar ? (
                      <img src={user?.profile?.avatar} alt={user?.profile?.fullName} className="w-full h-full object-cover" />
                    ) : (

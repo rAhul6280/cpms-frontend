@@ -35,10 +35,10 @@ function Sidebar({ isOpen, setIsOpen }) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 shadow-xl lg:shadow-none transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 shadow-xl lg:shadow-none transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex flex-col h-full">
           <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <h2 className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Menu</h2>
+            <h2 className="px-4 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4">Menu</h2>
             {links.map((link) => (
               <NavLink
                 key={link.name}
@@ -48,8 +48,8 @@ function Sidebar({ isOpen, setIsOpen }) {
                 className={({ isActive }) =>
                   `flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all border-transparent ${
                     isActive
-                      ? 'bg-linear-to-r from-indigo-50 to-blue-50 text-indigo-700 shadow-lg shadow-indigo-400/30 border border-indigo-500/40 '
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      ? 'bg-linear-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/40 dark:to-blue-900/40 text-indigo-700 dark:text-indigo-300 shadow-lg shadow-indigo-400/30 dark:shadow-indigo-900/30 border border-indigo-500/40 dark:border-indigo-500/30'
+                      : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white'
                   }`
                 }
               >
@@ -61,10 +61,10 @@ function Sidebar({ isOpen, setIsOpen }) {
             ))}
           </div>
           
-          <div className="p-4 border-t border-gray-100 bg-gray-50/50">
+          <div className="p-4 border-t border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50">
              <button 
                onClick={authLogout}
-               className="flex items-center w-full px-4 py-3 text-sm font-medium text-red-600 rounded-xl hover:bg-red-50 hover:text-red-700 transition-colors group"
+               className="flex items-center w-full px-4 py-3 text-sm font-medium text-red-600 dark:text-red-500 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/30 hover:text-red-700 dark:hover:text-red-400 transition-colors group"
              >
                <svg className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

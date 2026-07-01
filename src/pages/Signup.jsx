@@ -64,42 +64,42 @@ function Signup() {
   };
 
   return authLoading?<Loading/>:(
-    <div className='w-full min-h-screen flex flex-col-reverse md:flex-row bg-gray-50 font-sans'>
+    <div className='w-full min-h-screen flex flex-col-reverse md:flex-row bg-gray-50 dark:bg-gray-950 font-sans'>
       {/* Left Container - Form */}
-      <div className='relative w-full md:w-1/2 flex flex-col justify-center items-center py-12 px-6 sm:px-12 lg:px-24 bg-white  z-10'>
-        <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 border border-gray-200 hover:bg-gray-100 text-gray-600 transition-colors shadow-sm" title="Back to Home">
+      <div className='relative w-full md:w-1/2 flex flex-col justify-center items-center py-12 px-6 sm:px-12 lg:px-24 bg-white dark:bg-gray-900 z-10'>
+        <Link to="/" className="absolute top-6 left-6 md:top-8 md:left-8 flex items-center justify-center w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors shadow-sm" title="Back to Home">
           <FaArrowLeft size={16} />
         </Link>
         <div className='w-full max-w-md space-y-8'>
           <div className='text-center'>
-            <h1 className='text-4xl font-extrabold text-gray-900 tracking-tight'>Create an Account</h1>
-            <p className='mt-3 text-gray-500'>Join us today! Please enter your details.</p>
+            <h1 className='text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight'>Create an Account</h1>
+            <p className='mt-3 text-gray-500 dark:text-gray-400'>Join us today! Please enter your details.</p>
           </div>
 
           <form onSubmit={handleSubmit} className='mt-8 space-y-4'>
             <div className='space-y-3 pb-2'>
-              <p className='text-sm font-semibold text-gray-700'>I am a:</p>
+              <p className='text-sm font-semibold text-gray-700 dark:text-gray-300'>I am a:</p>
               <div className='flex gap-4'>
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, role: 'student' })}
                   className={`flex-1 flex flex-col items-center justify-center gap-3 py-5 rounded-2xl border-2 transition-all duration-200 ${formData.role === 'student'
-                      ? 'border-blue-600 bg-blue-50 text-blue-700 shadow-md scale-[1.02]'
-                      : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50 text-gray-500'
+                      ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 shadow-md scale-[1.02]'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400'
                     }`}
                 >
-                  <FaUserGraduate size={26} className={formData.role === 'student' ? 'text-blue-600' : 'text-gray-400'} />
+                  <FaUserGraduate size={26} className={formData.role === 'student' ? 'text-blue-600' : 'text-gray-400 dark:text-gray-500'} />
                   <span className='font-semibold text-sm'>Student</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, role: 'recruiter' })}
                   className={`flex-1 flex flex-col items-center justify-center gap-3 py-5 rounded-2xl border-2 transition-all duration-200 ${formData.role === 'recruiter'
-                      ? 'border-blue-600 bg-blue-50 text-blue-700 shadow-md scale-[1.02]'
-                      : 'border-gray-200 hover:border-blue-300 hover:bg-gray-50 text-gray-500'
+                      ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 shadow-md scale-[1.02]'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400'
                     }`}
                 >
-                  <FaUserTie size={26} className={formData.role === 'recruiter' ? 'text-blue-600' : 'text-gray-400'} />
+                  <FaUserTie size={26} className={formData.role === 'recruiter' ? 'text-blue-600' : 'text-gray-400 dark:text-gray-500'} />
                   <span className='font-semibold text-sm'>Recruiter</span>
                 </button>
               </div>
@@ -150,7 +150,7 @@ function Signup() {
               Sign Up
             </button>
 
-            <p className='text-center text-sm text-gray-600 mt-6'>
+            <p className='text-center text-sm text-gray-600 dark:text-gray-400 mt-6'>
               Already have an account? <Link to="/login" className='font-bold text-blue-600 hover:text-blue-500 transition-colors'>Log in</Link>
             </p>
           </form>
