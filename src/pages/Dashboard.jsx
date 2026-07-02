@@ -4,6 +4,7 @@ import Loading from '../components/Loading';
 import DashboardNavBar from '../components/DashboardNavBar';
 import Sidebar from '../components/Sidebar';
 import { Outlet } from 'react-router-dom';
+import Chatbot from '../components/Chatbot';
 
 function Dashboard() {
   const { authLoading, user } = useAuth();
@@ -25,6 +26,7 @@ function Dashboard() {
            </div>
         </main>
       </div>
+      <Chatbot />
     </div>
   );
 }
